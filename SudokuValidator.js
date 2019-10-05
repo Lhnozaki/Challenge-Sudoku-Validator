@@ -10,10 +10,25 @@
 
 exports.SudokuValidator = SudokuValidator;
 
-function SudokuValidator(sudoku){
+function SudokuValidator(sudoku) {
   this.sudoku = sudoku;
 }
 
-SudokuValidator.prototype.validate = function(num){
+SudokuValidator.prototype.validate = function(num) {
   // Do work here
-}
+  let findOrder = n => {
+    let arr = [];
+    for (i = 1; i <= n; i++) {
+      arr.push(i);
+    }
+    return arr;
+  };
+
+  return this.sudoku.length !== num
+    ? false
+    : this.sudoku.every(
+        e => e.sort((a, b) => a - b).join() === findOrder(num).join()
+      )
+    ? true
+    : false;
+};
